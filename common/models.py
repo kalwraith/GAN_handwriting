@@ -73,6 +73,7 @@ class Decoder(nn.Module):
     def forward(self, embedded, encode_layers):
         
         d1 = self.deconv1(embedded)
+        # torch.cat: 괄호 쌍에 있는 요소를 concat함, 해당 요소들은 동일 dimension이여야 함.
         d1 = torch.cat((d1, encode_layers['e7']), dim=1)
         d2 = self.deconv2(d1)
         d2 = torch.cat((d2, encode_layers['e6']), dim=1)
