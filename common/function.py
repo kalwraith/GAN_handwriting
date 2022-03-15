@@ -44,6 +44,13 @@ def dropout(p=0.2):
     return nn.Dropout(p)
 
 
+# nn.Linear: 선형회귀 모델, input_size: 입력변수의 차원, output_size: 출력변수의 차원
+# 인스턴스 생성시 파라미터는 임의값으로 초기화 되어 있음
+# 사용 예시
+# m = nn.Linear(1,1) --> y = x*w + b 모델
+# m = nn.Linear(10,5)
+# input = torch.randn(20,10)    # 입력: 20*10 배열
+# output = m(input)             # 출력: 10*5 배열
 def fc(input_size, output_size):
     return nn.Linear(input_size, output_size)
     

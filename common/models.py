@@ -100,8 +100,8 @@ class Discriminator(nn.Module):
         self.conv2 = conv2d(disc_dim, disc_dim*2)
         self.conv3 = conv2d(disc_dim*2, disc_dim*4)
         self.conv4 = conv2d(disc_dim*4, disc_dim*8)
-        self.fc1 = fc(disc_dim*8*8*8, 1)
-        self.fc2 = fc(disc_dim*8*8*8, category_num)
+        self.fc1 = fc(disc_dim*8*8*8, 1)            # self.fc1 에 nn.Linear(64*8*8*8,1) 인스턴스 객체를 할당
+        self.fc2 = fc(disc_dim*8*8*8, category_num) # self.fc2 에 nn.Linear(64*8*8*8,category_num) 인스턴스 객체를 할당
         
     def forward(self, images):
         batch_size = images.shape[0]
@@ -110,7 +110,7 @@ class Discriminator(nn.Module):
         h3 = self.conv3(h2)
         h4 = self.conv4(h3)
         
-        tf_loss_logit = self.fc1(h4.reshape(batch_size, -1))
+        tf_loss_logit = self.fc1(h4.reshape(batch_size, -1))    # h4.reshape(batch_size, -1)의 열 크기는 disc_dim*8*8*8 여야 함
         tf_loss = torch.sigmoid(tf_loss_logit)
         cat_loss = self.fc2(h4.reshape(batch_size, -1))
         
