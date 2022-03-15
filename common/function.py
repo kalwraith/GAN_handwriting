@@ -14,7 +14,7 @@ from torch.utils.data import DataLoader, TensorDataset
 def batch_norm(c_out, momentum=0.1):
     return nn.BatchNorm2d(c_out, momentum=momentum)
 
-
+# lrelu층 -> convolution 층 -> 배치정규화층 3개의 적층구조를 가진 모델 리턴
 def conv2d(c_in, c_out, k_size=3, stride=2, pad=1, dilation=1, bn=True, lrelu=True, leak=0.2):
     layers = []
     if lrelu:
